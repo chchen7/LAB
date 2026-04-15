@@ -8,44 +8,7 @@
 ### Docker & Docker Compose
 
 - **Docker & Docker Compose**: Required to orchestrate and deploy the 5G Core and UERANSIM containers.
-    
-    Update Packages and Install Dependencies
-    
-    ```bash
-    sudo apt-get update
-    sudo apt-get install ca-certificates curl gnupg
-    ```
-    
-    Add Docker's Official GPG Key
-    
-    ```bash
-    sudo install -m 0755 -d /etc/apt/keyrings
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-    sudo chmod a+r /etc/apt/keyrings/docker.gpg
-    ```
-    
-    Set Up the Repository
-    
-    ```bash
-    echo \
-      "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-      $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-      sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    ```
-    
-    Install Docker Engine and Docker Compose
-    
-    ```bash
-    sudo apt-get update
-    sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-    ```
-    
-    [Optional] Docker Group Setup for Convenience
-    
-    ```bash
-    sudo usermod -aG docker $USER
-    newgrp docker
-    ```
+    * **Installation Guide**: [Official Docker Install for Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
     
 
 ### Python
