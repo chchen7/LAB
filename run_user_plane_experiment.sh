@@ -10,11 +10,12 @@ if ! cat /lib/systemd/system/docker.service | grep "$DOCKER_API_TCP" 2>&1 > /dev
     systemctl daemon-reload
     service docker restart
 fi
-for e in $(seq 1 10); do
+
+for e in $(seq 1 16); do
     for c in 0 1; do
         echo "Run core $c tests (exec $e)"
-        for w in 500 400 300 200 100; do
-            for i in 1 3 5 7 9 11; do
+        for w in 2000; do
+            for i in 1 4 8; do
                 echo "Running experiment $i (w=$w)"
                 if [ "$c" -eq 0 ]; then
                     yamlfile="./docker-compose-free5gc.yaml"
@@ -50,6 +51,7 @@ for e in $(seq 1 10); do
                 cd tester
                 make build
                 make run
+                docker compose -f "$yamlfile" up -d
                 cd ..
 
                 echo ">>> Building gnb"
@@ -71,20 +73,30 @@ for e in $(seq 1 10); do
                 cd ..
 
                 cd tester
-                echo ">>> Launching $i UEs for $w seconds..."
-                make launch N=$i U=100 T=$w
+                echo ">>> Launching $i UEs"
+                make launch N=$i U=1 T=$w
 
-                sleep 120
+                sleep 30
+                for j in $(seq 1 $(($i))); do
+                    IP=$(docker exec ueransim-ueransim-gnb-$j sh -c "ip -4 -o addr show | grep 'uesimtun' | grep -oP '(?<=inet\s)\d+(\.\d+){3}'")
+                    if [ -z "$IP" ]; then
+                        echo " UE $j not found, in test $e core $c experiment $i"
+                    fi
+                    docker exec ueransim-ueransim-gnb-$j sh -c "iperf -c iperf --bind $IP -t 60 -i 1 -y C" > ../result-iperf-$e-$c-$i-$j.csv &
+                done
+
+                sleep 80
 
                 cd ..
                 echo ">>> [5/5] Collecting experiment $i data"
-                python3 generate.py --gnb-start 1 --gnb-count $i
-                mv ueransim_metrics.csv result-logs-$e-$c-$w-$i.csv
                 docker exec influxdb sh -c "influx query 'from(bucket:\"database\") |> range(start:-5m)' --raw" > result-logs-influxdb-$e-$c-$w-$i.csv
 
                 echo ">>> Cleaning up old containers and data..."
-                cd ueransim 
+                cd ueransim
                 docker compose -f "$yamlfile" down
+                cd ..
+                cd tester
+                docker compose -f "$yamlfile" down -v
                 cd ..
                 cd $corepath
                 docker compose down -v
@@ -103,3 +115,4 @@ for e in $(seq 1 10); do
         done
     done
 done
+
