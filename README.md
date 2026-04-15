@@ -46,15 +46,11 @@
     git checkout <branch_name>
     ```
     
-    | **Test** | **Version** | **Supported Kernel** | OS version | **Git Branch** |
-    | --- | --- | --- | --- | --- |
-    | Old version 
-    C | free5GC  v3.2.1
-    Open5GS v2.3.6 | 5.4.0 | **Ubuntu 20.04** | Old-Version-CP |
-    | Old version | free5GC  v3.0.6
-    Open5GS v2.3.6 | 5.4.0 | **Ubuntu 20.04** | Old-Version-UP |
-    | New version | free5GC  v4.2.1
-    Open5GS v2.7.6 | not limited | **Ubuntu 22.04** | New-Version |
+    | Test | Version | Supported Kernel | OS version | Git Branch |
+    | :--- | :--- | :--- | :--- | :--- |
+    | **Old version** | free5GC v3.2.1 & Open5GS v2.3.6 | 5.4.0 | Ubuntu 20.04 | Old-Version-CP |
+    | **Old version** | free5GC v3.0.6 & Open5GS v2.3.6 | 5.4.0 | Ubuntu 20.04 | Old-Version-UP |
+    | **New version** | free5GC v4.2.1 & Open5GS v2.7.6 | not limited | Ubuntu 22.04 | New-Version |
 - Build/Get Core Network images
     - free5GC
     
