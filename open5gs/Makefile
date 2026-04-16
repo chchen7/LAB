@@ -6,7 +6,7 @@ build:
 	set -a; \
 	source .env; \
 	set +a; \
-	cd docker_open5gs/base
+	cd base
 	docker build --no-cache --force-rm -t docker_open5gs .
 
 	cd ../mongo
