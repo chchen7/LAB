@@ -60,10 +60,10 @@ RUN apt-get update && \
         libidn11-dev \
         libtalloc-dev
 
-RUN apt-get update && apt-get install -y curl xz-utils && \
-    curl -fsSL https://nodejs.org/dist/v14.21.3/node-v14.21.3-linux-x64.tar.xz -o node.tar.xz && \
-    tar -xJf node.tar.xz -C /usr/local --strip-components=1 && \
-    rm node.tar.xz
+RUN apt-get update && apt-get install -y curl ca-certificates && \
+    curl -fsSL https://nodejs.org/dist/v14.21.3/node-v14.21.3-linux-x64.tar.gz | tar -xzC /usr/local --strip-components=1 && \
+    ln -s /usr/local/bin/node /usr/local/bin/nodejs && \
+    apt-get clean
 
 # Get open5gs code and install
 RUN git clone --recursive -b v2.3.6 https://github.com/open5gs/open5gs && cd open5gs && \
@@ -105,12 +105,10 @@ RUN apt-get update && \
 
 RUN pip3 install click
 
-RUN apt-get update && apt-get install -y ca-certificates curl gnupg && \
-    mkdir -p /etc/apt/keyrings && \
-    curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg && \
-    echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_14.x nodistro main" > /etc/apt/sources.list.d/nodesource.list && \
-    apt-get update && apt-get install -y --allow-unauthenticated nodejs && \
-    apt-get remove -y curl gnupg && apt-get autoremove -y && apt-get autoclean
+RUN apt-get update && apt-get install -y curl ca-certificates && \
+    curl -fsSL https://nodejs.org/dist/v14.21.3/node-v14.21.3-linux-x64.tar.gz | tar -xzC /usr/local --strip-components=1 && \
+    ln -s /usr/local/bin/node /usr/local/bin/nodejs && \
+    apt-get clean
 
 RUN update-ca-certificates
 
