@@ -318,6 +318,7 @@ services:
 
 networks:
   privnet:
+    name: free5gc-compose_privnet
     ipam:
       driver: default
       config:
