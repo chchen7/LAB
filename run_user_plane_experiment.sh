@@ -35,6 +35,7 @@ for e in $(seq 1 16); do
                 echo ">>> run core network..."
                 if [ "$c" -eq 0 ]; then
                     cd gtp5g
+                    sudo make uninstall
                     make
                     sudo make install
                     cd ..
