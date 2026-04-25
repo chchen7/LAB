@@ -79,13 +79,13 @@ for (var i = 1; i <= num_ues; i++) {
             "pduSessionTypes": { "defaultSessionType": "IPV4", "allowedSessionTypes": [ "IPV4" ] },
             "sscModes": { "defaultSscMode": "SSC_MODE_1", "allowedSscModes": [ "SSC_MODE_2", "SSC_MODE_3" ] },
             "5gQosProfile": { "5qi": 9, "arp": { "priorityLevel": 8, "preemptCap": "", "preemptVuln": "" }, "priorityLevel": 8 },
-            "sessionAmbr": { "uplink": "200 Mbps", "downlink": "100 Mbps" }
+            "sessionAmbr": { "uplink": "1024 Mbps", "downlink": "1024 Mbps" }
         },
         "internet2": {
             "pduSessionTypes": { "defaultSessionType": "IPV4", "allowedSessionTypes": [ "IPV4" ] },
             "sscModes": { "defaultSscMode": "SSC_MODE_1", "allowedSscModes": [ "SSC_MODE_2", "SSC_MODE_3" ] },
             "5gQosProfile": { "5qi": 9, "arp": { "priorityLevel": 8, "preemptCap": "", "preemptVuln": "" }, "priorityLevel": 8 },
-            "sessionAmbr": { "uplink": "200 Mbps", "downlink": "100 Mbps" }
+            "sessionAmbr": { "uplink": "1024 Mbps", "downlink": "1024 Mbps" }
         }
     };
 
