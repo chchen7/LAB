@@ -11,11 +11,12 @@ configuration:
     bindingIPv4: nrf.free5gc.org  # IP used to bind the service
     port: 8000 # port used to bind the service
     cert: # the local path of TLS key
+      verify: false # Verify outgoing SBI HTTPS certificates
       pem: cert/nrf.pem # NRF TLS Certificate
       key: cert/nrf.key # NRF TLS Private key
     rootcert: # the local path of root CA certs
-      pem: cert/nrf.pem
-      key: cert/nrf.key
+      pem: cert/root.pem
+      key: cert/root.key
     oauth: true
   DefaultPlmnId:
     mcc: 208 # Mobile Country Code (3 digits string, digit: 0~9)

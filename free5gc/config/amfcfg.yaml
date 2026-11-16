@@ -13,6 +13,7 @@ configuration:
     bindingIPv4: amf.free5gc.org  # IP used to bind the service
     port: 8000 # port used to bind the service
     tls: # the local path of TLS key
+      verify: false # Verify outgoing SBI HTTPS certificates
       pem: cert/amf.pem # AMF TLS Certificate
       key: cert/amf.key # AMF TLS Private key
   serviceNameList: # the SBI services provided by this AMF, refer to TS 29.518
@@ -21,6 +22,7 @@ configuration:
     - namf-mt   # Namf_MT service
     - namf-loc  # Namf_Location service
     - namf-oam  # OAM service
+    - namf-callback # Namf_Callback service
   servedGuamiList: # Guami (Globally Unique AMF ID) list supported by this AMF
     # <GUAMI> = <MCC><MNC><AMF ID>
     - plmnId: # Public Land Mobile Network ID, <PLMN ID> = <MCC><MNC>
@@ -118,6 +120,18 @@ configuration:
     maxAttempts: 2 # the maximum attempts of each sctp connection
     maxInitTimeout: 2 # the maximum init timeout of each sctp connection
   defaultUECtxReq: false # the default value of UE Context Request to decide when triggering Initial Context Setup procedure
+
+  # Metrics configuration
+  # If using the same bindingIPv4 as the sbi server, make sure that the ports are different
+  metrics:
+    enable: false # (Optional, default false)
+    scheme: http # (Required) the protocol for metrics (http or https, default https)
+    bindingIPv4: amf.free5gc.org # (Required) IP used to bind the metrics endpoint (default 0.0.0.0)
+    port: 9091 # (Optional, default 9091) port used to bind the service
+    tls: # (Optional) the local path of TLS key (Could be the same as the sbi ones)
+      pem: cert/amf.pem # AMF TLS Certificate
+      key: cert/amf.key # AMF TLS Private key
+    namespace: free5gc # (Optional, default free5gc)
 
   ngapWorkerPoolSize: 0 # (int), default equal to runtime.NumCPU()
   ngapTaskBufferSize: 4096 # (int)

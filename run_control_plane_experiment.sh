@@ -41,7 +41,11 @@ for e in $(seq 1 10); do
                     cd ..
                 fi
                 cd $corepath
-                docker compose up -d
+                if [ "$c" -eq 0 ]; then
+                    docker compose -f "$yamlfile" up -d --build
+                elif [ "$c" -eq 1 ]; then
+                    docker compose up -d
+                fi
                 cd ..
                 sleep 15
 

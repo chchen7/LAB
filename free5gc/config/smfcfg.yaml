@@ -10,12 +10,14 @@ configuration:
     bindingIPv4: smf.free5gc.org # IP used to bind the service
     port: 8000 # Port used to bind the service
     tls: # the local path of TLS key
+      verify: false # Verify outgoing SBI HTTPS certificates
       key: cert/smf.key # SMF TLS Certificate
       pem: cert/smf.pem # SMF TLS Private key
   serviceNameList: # the SBI services provided by this SMF, refer to TS 29.502
     - nsmf-pdusession # Nsmf_PDUSession service
     - nsmf-event-exposure # Nsmf_EventExposure service
     - nsmf-oam # OAM service
+    - nsmf-callback # Nsmf_Callback service
   snssaiInfos: # the S-NSSAI (Single Network Slice Selection Assistance Information) list supported by this AMF
     - sNssai: # S-NSSAI (Single Network Slice Selection Assistance Information)
         sst: 1 # Slice/Service Type (uinteger, range: 0~255)
@@ -90,9 +92,9 @@ configuration:
     maxRetryTimes: 3 # the max number of retransmission
   nrfUri: http://nrf.free5gc.org:8000 # a valid URI of NRF
   nrfCertPem: cert/nrf.pem # NRF Certificate
-  urrPeriod: 10000 # default usage report period in seconds
-  urrThreshold: 1000000000 # default usage report threshold in bytes
-  requestedUnit: 1000000000
+  urrPeriod: 10 # default usage report period in seconds
+  urrThreshold: 1000 # default usage report threshold in bytes
+  requestedUnit: 1000
 
   # Metrics configuration
   # If using the same bindingIPv4 as the sbi server, make sure that the ports are different

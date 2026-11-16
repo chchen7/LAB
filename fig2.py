@@ -91,7 +91,7 @@ for core_idx, core in enumerate(cores):
         if delay_idx == MAX_AXIS_ROW - 1: 
             ax.set_xlabel("Injection Timeline (seconds)")
         if core_idx == 0: 
-            ax.set_ylabel("DataPlaneReady (ns)")
+            ax.set_ylabel("DataPlaneReady (ms)")
         
         ax.legend(fontsize=7, markerscale=1.2, loc='upper right')
 
